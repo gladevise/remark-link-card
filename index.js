@@ -1,15 +1,14 @@
 const visit = require('unist-util-visit')
 const rlc = (options) => {
-  // console.log(options);
 
   return async tree => {
-    // console.log(tree);
-    visit(tree, 'heading', node => {
-      if (node.depth !== 1) {
-        return
-      }
+    visit(tree, 'paragraph', node => {
       visit(node, 'text', textNode => {
-        textNode.value = 'BREAKING ' + textNode.value
+        const urls = textNode.value.match(/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/g);
+        if (urls && urls.length === 1) {
+          node.children[0].type = 'html'
+          node.children[0].value = `<a href="${urls[0]}">${urls[0]}</a>`
+        }
       })
     })
 

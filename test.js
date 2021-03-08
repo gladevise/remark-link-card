@@ -4,11 +4,16 @@ const rlc = require('.')
 
 const doc = fs.readFileSync('fixture.md', 'utf8')
 
-test('adds BREAKING to h1s', async () => {
+// Bare links are converted link cards.
+test('convert bare links to link cards', async () => {
   const result = await remark()
     .use(rlc)
     .process(doc)
-  expect(result.contents).toContain('# BREAKING Hello, world!')
+  expect(result.contents).toContain('</a>')
 
   console.log(result.contents);
 })
+
+// Inline links are not converted to link cards.
+
+// Multiple links in one line are not converted to link cards
