@@ -1,7 +1,7 @@
 {
   "name": "remark-link-card",
   "version": "1.0.0",
-  "description": "remark plugin to convert literal link to link card",
+  "description": "remark plugin to convert literal links to link cards",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -29,6 +29,7 @@
     "remark": "^13.0.0"
   },
   "dependencies": {
+    "open-graph-scraper": "^4.8.0",
     "unist-util-visit": "^2.0.3"
   }
 }
