@@ -1,8 +1,8 @@
-# remark-link-card test
+# remark-link-card
 
-## bare links
+## Bare links
 
-bare links are converted to link cards.
+Bare links are converted to link cards.
 
 http://example.com/
 
@@ -12,7 +12,7 @@ https://www.npmjs.com/package/remark-link-card
 
 <https://www.npmjs.com/package/remark-link-card>
 
-## inline links
+## Inline links
 
 Inline links are **not** converted to link cards.
 
@@ -20,7 +20,7 @@ Inline links are **not** converted to link cards.
 
 [remark-link-card](https://www.npmjs.com/package/remark-link-card) is inline link
 
-## multiple links in one line
+## Multiple links in one line
 
 If there are multiple links in one line, they will **not** be converted to link cards.
 
