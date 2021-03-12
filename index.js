@@ -44,7 +44,7 @@ const createHtml = (targetUrl, ogResult) => {
   const faviconSrc = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
   const imageElement = ogResult?.ogImage?.url ?
     `<div class="rlc-image-container">
-      <image class="rlc-image" src="${ogResult.ogImage.url}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
+      <img class="rlc-image" src="${ogResult.ogImage.url}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
     </div>`
     : '';
 

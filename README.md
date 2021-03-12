@@ -86,7 +86,7 @@ Bare links are converted to link cards.
     </div>
   </div>
   <div class="rlc-image-container">
-      <image class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
     </div>
 </a>
 
@@ -112,7 +112,7 @@ Bare links are converted to link cards.
     </div>
   </div>
   <div class="rlc-image-container">
-      <image class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
     </div>
 </a>
 
