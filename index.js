@@ -11,14 +11,8 @@ const rlc = (options) => {
         if (urls && urls.length === 1) {
           transformers.push(async () => {
 
-            try {
-              // get open graph data
-              const { result } = await ogs({ url: urls[0] })
-              node.children[0].type = 'html'
-              node.children[0].value = createHtml(urls[0], result)
-            } catch (error) {
-              console.log(error);
-            }
+            node.children[0].type = 'html'
+            node.children[0].value = await createHtml(urls[0])
 
           })
         }
@@ -35,19 +29,35 @@ const rlc = (options) => {
   }
 }
 
-const createHtml = (targetUrl, ogResult) => {
-  // setting fallbacks
+const getOpenGraph = async (targetUrl) => {
+  try {
+    const { result } = await ogs({ url: targetUrl })
+    return result
+  } catch (error) {
+    console.error(error);
+    return undefined
+  }
+}
+
+const createHtml = async (targetUrl) => {
+  // get favicon
   const parsedUrl = new URL(targetUrl)
+  const faviconSrc = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
+
+  // get open graph
+  const ogResult = await getOpenGraph(targetUrl)
+
+  // Set data
   const title = ogResult?.ogTitle || parsedUrl.hostname
   const descriptionElement = ogResult?.ogDescription ?
     `<div class="rlc-description">${ogResult.ogDescription}</div>` : '';
-  const faviconSrc = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
   const imageElement = ogResult?.ogImage?.url ?
     `<div class="rlc-image-container">
       <img class="rlc-image" src="${ogResult.ogImage.url}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
     </div>`
     : '';
 
+  // create output HTML
   const outputHTML = `
 <a class="rlc-container" href="${targetUrl}">
   <div class="rlc-info">
