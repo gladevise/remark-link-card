@@ -8,8 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "gray-matter": "^4.0.2",
     "next": "10.0.8",
+    "next-mdx-remote": "^2.1.3",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "remark-link-card": "github:gladevise/remark-link-card"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@emotion/babel-plugin": "^11.2.0"
   }
 }
