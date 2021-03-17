@@ -11,17 +11,15 @@ const rlc = (options) => {
         if (urls && urls.length === 1) {
           transformers.push(async () => {
 
+            // create linkCardNode
             const linkCardHtml = await createHtml(urls[0]);
             const linkCardNode = {
               type: 'html',
               value: linkCardHtml,
             }
 
-            // node.children[0] = linkCardNode;
-
+            // Replace paragraph node with linkCardNode
             tree.children.splice(index, 1, linkCardNode)
-
-            // console.log(node);
 
           })
         }
