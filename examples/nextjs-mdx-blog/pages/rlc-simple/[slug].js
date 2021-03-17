@@ -88,7 +88,7 @@ export default function Post({ source, frontMatter }) {
         border-bottom-right-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
       }
-    `}></Global>
+    `} />
       <div css={css`
         max-width: 1440px;
         margin: 0 auto;

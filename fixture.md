@@ -25,3 +25,11 @@ Inline links are **not** converted to link cards.
 If there are multiple links in one line, they will **not** be converted to link cards.
 
 http://example.com/ http://example.com/ http://example.com/
+
+## Invalid links
+
+http://localhost:3000/rlc-simple/sample
+
+## Links where ogs fails
+
+https://codepen.io/gladevise/pen/VwmEvoo

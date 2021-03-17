@@ -34,7 +34,7 @@ const getOpenGraph = async (targetUrl) => {
     const { result } = await ogs({ url: targetUrl })
     return result
   } catch (error) {
-    console.error(error);
+    console.error(`Failed to get the Open Graph data of ${error.result.requestUrl} due to ${error.result.error}.`);
     return undefined
   }
 }
