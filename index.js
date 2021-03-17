@@ -5,14 +5,21 @@ const rlc = (options) => {
 
   return async tree => {
     transformers = []
-    visit(tree, 'paragraph', node => {
+    visit(tree, 'paragraph', (node, index) => {
       visit(node, 'text', textNode => {
         const urls = textNode.value.match(/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/g);
         if (urls && urls.length === 1) {
           transformers.push(async () => {
 
-            node.children[0].type = 'html'
-            node.children[0].value = await createHtml(urls[0])
+            // create linkCardNode
+            const linkCardHtml = await createHtml(urls[0]);
+            const linkCardNode = {
+              type: 'html',
+              value: linkCardHtml,
+            }
+
+            // Replace paragraph node with linkCardNode
+            tree.children.splice(index, 1, linkCardNode)
 
           })
         }
