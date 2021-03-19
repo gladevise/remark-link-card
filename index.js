@@ -62,7 +62,6 @@ const createHtml = async (targetUrl, isCache) => {
   // create favicon element
   let faviconElement
   const faviconSrc = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
-
   if (isCache) {
     const faviconFilename = await downloadImage(
       faviconSrc,
@@ -78,14 +77,30 @@ const createHtml = async (targetUrl, isCache) => {
   }
 
 
-  // Set data
+  // create descriptionElement
   const descriptionElement = ogResult?.ogDescription ?
     `<div class="rlc-description">${ogResult.ogDescription}</div>` : '';
-  const imageElement = ogResult?.ogImage?.url ?
-    `<div class="rlc-image-container">
+
+  // create imageElement
+  let imageElement
+  if (ogResult?.ogImage?.url) {
+    if (isCache) {
+      const imageFilename = await downloadImage(
+        ogResult.ogImage.url,
+        path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
+      )
+      imageElement = `<div class="rlc-image-container">
+      <img class="rlc-image" src="${path.join(defaultOutputDirectory, imageFilename)}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
+    </div>`.trim()
+
+    } else {
+      imageElement = `<div class="rlc-image-container">
       <img class="rlc-image" src="${ogResult.ogImage.url}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
-    </div>`
-    : '';
+    </div>`.trim()
+    }
+  } else {
+    imageElement = ''
+  }
 
   // create output HTML
   const outputHTML = `
