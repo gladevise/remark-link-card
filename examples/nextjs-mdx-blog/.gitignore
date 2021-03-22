@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# ignore remark-link-card
+public/remark-link-card
