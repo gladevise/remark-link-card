@@ -142,7 +142,14 @@ const createLinkCard = (data) => {
 }
 
 const downloadImage = async (url, saveDirectory) => {
-  // TODO: check file existence(if it is existed, return filename)
+  const filename = sanitize(url)
+  const saveFilePath = path.join(saveDirectory, filename)
+  // check file existence(if it is existed, return filename)
+  try {
+    await access(saveFilePath)
+    return filename
+  } catch (error) {
+  }
   // check directory existence
   try {
     await access(saveDirectory)
@@ -151,17 +158,12 @@ const downloadImage = async (url, saveDirectory) => {
     await mkdir(saveDirectory, { recursive: true })
   }
 
-  //TODO: trycatch return undefined when failed
-  const response = await fetch(url);
-  const buffer = await response.buffer();
-
-  const filename = sanitize(url)
-  const saveFilePath = path.join(saveDirectory, filename)
-
+  // fetch data
   try {
+    const response = await fetch(url);
+    const buffer = await response.buffer();
     writeFile(saveFilePath, buffer)
   } catch (error) {
-    //TODO: meaningfull message
     console.error(error);
     return undefined
   }
