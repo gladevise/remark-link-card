@@ -213,6 +213,54 @@ You can style link card like this.
 }
 ```
 
-### Options
+## API
 
-Comming soon...
+### `remark().use(rlc[, options])`
+
+Convert text links to link cards.
+
+##### `options`
+
+###### `options.cache`
+
+Cache image for [`next/image`](https://nextjs.org/docs/api-reference/next/image) (`bool`, default:`false`)
+
+Automatically save open graph images and favicon images to `process.cwd()/public/remark-link-card`.
+
+Automatically insert the path to images starting with `/remark-link-card/` in the src attribute of img tags.
+
+So, if cache is true, the output will look like this.
+
+```markdown
+# remark-link-card
+
+## Bare links
+
+Bare links are converted to link cards.
+
+<a class="rlc-container" href="http://example.com/">
+  <div class="rlc-info">
+    <div class="rlc-title">Example Domain</div>
+
+    <div class="rlc-url-container">
+      <img class="rlc-favicon" src="/remark-link-card/httpswww.google.coms2faviconsdomain=example.com" alt="Example Domain favicon" width="16px" height="16px">
+      <span class="rlc-url">http://example.com/</span>
+    </div>
+  </div>
+
+</a>
+
+<a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
+  <div class="rlc-info">
+    <div class="rlc-title">remark-link-card</div>
+    <div class="rlc-description">remark plugin to convert literal link to link card</div>
+    <div class="rlc-url-container">
+      <img class="rlc-favicon" src="/remark-link-card/httpswww.google.coms2faviconsdomain=www.npmjs.com" alt="remark-link-card favicon" width="16px" height="16px">
+      <span class="rlc-url">https://www.npmjs.com/package/remark-link-card</span>
+    </div>
+  </div>
+  <div class="rlc-image-container">
+      <img class="rlc-image" src="/remark-link-card/httpsstatic.npmjs.com338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+    </div>
+</a>
+```

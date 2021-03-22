@@ -122,7 +122,7 @@ const createHtml = async (targetUrl, isCache) => {
 }
 
 const downloadImage = async (url, saveDirectory) => {
-  // TODO: check file existence
+  // TODO: check file existence(if it is existed, return filename)
   // check directory existence
   try {
     await access(saveDirectory)
