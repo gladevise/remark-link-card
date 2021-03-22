@@ -69,11 +69,16 @@ const fetchData = async (targetUrl, options) => {
   const description = ogResult?.ogDescription || ''
   // set favicon src
   const faviconUrl = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
-  const faviconSrc = options?.cache ?
-    await downloadImage(
+  let faviconSrc = ''
+  if (options?.cache) {
+    faviconFilename = await downloadImage(
       faviconUrl,
       path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
-    ) : faviconUrl
+    )
+    faviconSrc = faviconFilename && path.join(defaultOutputDirectory, faviconFilename)
+  } else {
+    faviconSrc = faviconUrl;
+  }
   // set open graph image src
   let ogImageSrc = ''
   if (ogResult?.ogImage?.url) {
