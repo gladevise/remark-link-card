@@ -12,8 +12,11 @@ const rlc = (options) => {
 
   return async tree => {
     transformers = []
-    visit(tree, 'paragraph', (node, index) => {
-      visit(node, 'text', textNode => {
+    visit(tree, 'paragraph', (paragraphNode, index) => {
+      if (paragraphNode.children.length !== 1) {
+        return tree
+      }
+      visit(paragraphNode, 'text', textNode => {
         const urls = textNode.value.match(/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/g);
         if (urls && urls.length === 1) {
           transformers.push(async () => {

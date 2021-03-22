@@ -1,6 +1,7 @@
 const fs = require('fs')
 const HTMLParser = require('node-html-parser')
 const remark = require('remark')
+const renderToString = require('next-mdx-remote/render-to-string')
 const rlc = require('.')
 
 const doc = fs.readFileSync('fixture.md', 'utf8')
@@ -45,6 +46,23 @@ test('Multiple links in one line are not converted to link cards', async () => {
   // console.log(result.contents);
 })
 
+test('Multiple links in one line are not converted to link cards with next-mdx-remote', async () => {
+
+  const mdxSource = await renderToString(
+    multipleLinksSample,
+    {
+      mdxOptions: {
+        remarkPlugins: [
+          rlc
+        ]
+      }
+    }
+  )
+  expect(mdxSource.renderedOutput.trim()).toEqual(`<p><a href="http://example.com/">http://example.com/</a> <a href="http://example.com/">http://example.com/</a> <a href="http://example.com/">http://example.com/</a></p>`.trim())
+
+  // console.log(mdxSource.renderedOutput);
+})
+
 // Use cache ogImage
 test('Use cache ogImage', async () => {
   const result = await remark()
@@ -53,13 +71,8 @@ test('Use cache ogImage', async () => {
 
   const parsedOutput = HTMLParser.parse(result.contents)
   const imageElements = parsedOutput.querySelectorAll('img')
-  const imgSrcList = imageElements.map(element => {
-    return element.getAttribute('src')
+  imageElements.map(element => {
+    expect(element.getAttribute('src').startsWith('/remark-link-card/'))
   })
-  console.log(imgSrcList);
-  // Check ogImage is saved and path resolved?
-
-  // Check img path is resolved?
-
-  console.log(result.contents);
+  // console.log(result.contents);
 })
