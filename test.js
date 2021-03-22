@@ -72,7 +72,7 @@ test('Use cache ogImage', async () => {
   const parsedOutput = HTMLParser.parse(result.contents)
   const imageElements = parsedOutput.querySelectorAll('img')
   imageElements.map(element => {
-    expect(element.getAttribute('src').startsWith('/remark-link-card/'))
+    expect(element.getAttribute('src').startsWith('/remark-link-card/')).toBe(true)
   })
   // console.log(result.contents);
 })
