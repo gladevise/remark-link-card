@@ -21,8 +21,11 @@ const rlc = (options) => {
         if (urls && urls.length === 1) {
           transformers.push(async () => {
 
+            // fetch data
+            const data = await fetchData(urls[0], options)
+
             // create linkCardNode
-            const linkCardHtml = await createHtml(urls[0], options?.cache);
+            const linkCardHtml = createLinkCard(data);
             const linkCardNode = {
               type: 'html',
               value: linkCardHtml,
@@ -56,64 +59,73 @@ const getOpenGraph = async (targetUrl) => {
   }
 }
 
-const createHtml = async (targetUrl, isCache) => {
+const fetchData = async (targetUrl, options) => {
   // get open graph
   const ogResult = await getOpenGraph(targetUrl)
+  // set title
   const parsedUrl = new URL(targetUrl)
   const title = ogResult?.ogTitle || parsedUrl.hostname
-
-  // create favicon element
-  let faviconElement
-  const faviconSrc = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
-  if (isCache) {
-    const faviconFilename = await downloadImage(
-      faviconSrc,
+  // set description
+  const description = ogResult?.ogDescription || ''
+  // set favicon src
+  const faviconUrl = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
+  const faviconSrc = options?.cache ?
+    await downloadImage(
+      faviconUrl,
       path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
-    )
-    faviconElement = `
-      <img class="rlc-favicon" src="${path.join(defaultOutputDirectory, faviconFilename)}" alt="${title} favicon" width="16px" height="16px">
-    `.trim()
-  } else {
-    faviconElement = `
-      <img class="rlc-favicon" src="${faviconSrc}" alt="${title} favicon" width="16px" height="16px">
-    `
-  }
-
-
-  // create descriptionElement
-  const descriptionElement = ogResult?.ogDescription ?
-    `<div class="rlc-description">${ogResult.ogDescription}</div>` : '';
-
-  // create imageElement
-  let imageElement
+    ) : faviconUrl
+  // set open graph image src
+  let ogImageSrc = ''
   if (ogResult?.ogImage?.url) {
-    if (isCache) {
+    if (options?.cache) {
       const imageFilename = await downloadImage(
         ogResult.ogImage.url,
         path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
       )
-      imageElement = `<div class="rlc-image-container">
-      <img class="rlc-image" src="${path.join(defaultOutputDirectory, imageFilename)}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
-    </div>`.trim()
-
+      ogImageSrc = imageFilename && path.join(defaultOutputDirectory, imageFilename)
     } else {
-      imageElement = `<div class="rlc-image-container">
-      <img class="rlc-image" src="${ogResult.ogImage.url}" alt="${ogResult.ogImage?.alt || title}" width="100%" height="100%"/>
-    </div>`.trim()
+      ogImageSrc = ogResult.ogImage.url
     }
-  } else {
-    imageElement = ''
   }
+  // set open graph image alt
+  const ogImageAlt = ogResult?.ogImage?.alt || title
+
+  return {
+    title,
+    description,
+    faviconSrc,
+    ogImageSrc,
+    ogImageAlt,
+    url: targetUrl
+  }
+}
+
+const createLinkCard = (data) => {
+
+  // create favicon element
+  const faviconElement = data.faviconSrc ?
+    `<img class="rlc-favicon" src="${data.faviconSrc}" alt="${data.title} favicon" width="16px" height="16px">`.trim()
+    : ''
+
+  // create description element
+  const descriptionElement = data.description ?
+    `<div class="rlc-description">${data.description}</div>` : '';
+
+  // create image element
+  const imageElement = data.ogImageSrc ?
+    `<div class="rlc-image-container">
+      <img class="rlc-image" src="${data.ogImageSrc}" alt="${data.ogImageAlt}" width="100%" height="100%"/>
+    </div>`.trim() : ''
 
   // create output HTML
   const outputHTML = `
-<a class="rlc-container" href="${targetUrl}">
+<a class="rlc-container" href="${data.url}">
   <div class="rlc-info">
-    <div class="rlc-title">${title}</div>
+    <div class="rlc-title">${data.title}</div>
     ${descriptionElement}
     <div class="rlc-url-container">
       ${faviconElement}
-      <span class="rlc-url">${targetUrl}</span>
+      <span class="rlc-url">${data.url}</span>
     </div>
   </div>
   ${imageElement}
