@@ -225,11 +225,11 @@ Convert text links to link cards.
 
 Cache image for [`next/image`](https://nextjs.org/docs/api-reference/next/image) (`bool`, default:`false`)
 
-Automatically save open graph images and favicon images to `process.cwd()/public/remark-link-card`.
+Automatically save open graph images and favicon images to `process.cwd()/public/remark-link-card/`.
 
 Automatically insert the path to images starting with `/remark-link-card/` in the src attribute of img tags.
 
-So, if cache is true, the output will look like this.
+So, if `options.cache` is `true`, the output will look like this.
 
 ```markdown
 # remark-link-card
