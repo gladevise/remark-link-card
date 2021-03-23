@@ -137,7 +137,6 @@ const createLinkCard = (data) => {
 </a>
 `.trim()
 
-  // TODO: format outputHTML
   return outputHTML
 }
 

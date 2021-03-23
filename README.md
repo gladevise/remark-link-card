@@ -67,13 +67,11 @@ Bare links are converted to link cards.
 <a class="rlc-container" href="http://example.com/">
   <div class="rlc-info">
     <div class="rlc-title">Example Domain</div>
-
     <div class="rlc-url-container">
       <img class="rlc-favicon" src="https://www.google.com/s2/favicons?domain=example.com" alt="Example Domain favicon" width="16px" height="16px">
       <span class="rlc-url">http://example.com/</span>
     </div>
   </div>
-
 </a>
 
 <a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
@@ -86,20 +84,18 @@ Bare links are converted to link cards.
     </div>
   </div>
   <div class="rlc-image-container">
-      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
-    </div>
+    <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+  </div>
 </a>
 
 <a class="rlc-container" href="http://example.com/">
   <div class="rlc-info">
     <div class="rlc-title">Example Domain</div>
-
     <div class="rlc-url-container">
       <img class="rlc-favicon" src="https://www.google.com/s2/favicons?domain=example.com" alt="Example Domain favicon" width="16px" height="16px">
       <span class="rlc-url">http://example.com/</span>
     </div>
   </div>
-
 </a>
 
 <a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
@@ -112,8 +108,8 @@ Bare links are converted to link cards.
     </div>
   </div>
   <div class="rlc-image-container">
-      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
-    </div>
+    <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+  </div>
 </a>
 
 ## Inline links
@@ -241,13 +237,11 @@ Bare links are converted to link cards.
 <a class="rlc-container" href="http://example.com/">
   <div class="rlc-info">
     <div class="rlc-title">Example Domain</div>
-
     <div class="rlc-url-container">
       <img class="rlc-favicon" src="/remark-link-card/httpswww.google.coms2faviconsdomain=example.com" alt="Example Domain favicon" width="16px" height="16px">
       <span class="rlc-url">http://example.com/</span>
     </div>
   </div>
-
 </a>
 
 <a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
@@ -260,7 +254,7 @@ Bare links are converted to link cards.
     </div>
   </div>
   <div class="rlc-image-container">
-      <img class="rlc-image" src="/remark-link-card/httpsstatic.npmjs.com338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
-    </div>
+    <img class="rlc-image" src="/remark-link-card/httpsstatic.npmjs.com338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+  </div>
 </a>
 ```
