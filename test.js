@@ -1,6 +1,8 @@
 const fs = require('fs')
 const HTMLParser = require('node-html-parser')
 const remark = require('remark')
+const remarkHtmll = require('remark-html')
+const { default: remarkEmbdder } = require('@remark-embedder/core')
 const renderToString = require('next-mdx-remote/render-to-string')
 const rlc = require('.')
 
@@ -74,5 +76,63 @@ test('Use cache ogImage', async () => {
   imageElements.map(element => {
     expect(element.getAttribute('src').startsWith('/remark-link-card/')).toBe(true)
   })
+  // console.log(result.contents);
+})
+
+// With remark-embedder
+const CodeSandboxTransformer = {
+  name: 'CodeSandbox',
+  // shouldTransform can also be async
+  shouldTransform(url) {
+    const { host, pathname } = new URL(url)
+    return (
+      ['codesandbox.io', 'www.codesandbox.io'].includes(host) &&
+      pathname.includes('/s/')
+    )
+  },
+  // getHTML can also be async
+  getHTML(url) {
+    const iframeUrl = url.replace('/s/', '/embed/')
+
+    return `<iframe src="${iframeUrl}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>`
+  },
+}
+
+const exampleMarkdown = `
+This is a CodeSandbox:
+
+https://codesandbox.io/s/css-variables-vs-themeprovider-df90h
+
+https://www.npmjs.com/package/remark-link-card
+`
+
+const expectedResult = `
+<p>This is a CodeSandbox:</p>
+<iframe src="https://codesandbox.io/embed/css-variables-vs-themeprovider-df90h" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+<a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
+  <div class="rlc-info">
+    <div class="rlc-title">remark-link-card</div>
+    <div class="rlc-description">Remark plugin to convert text links to link cards inspired by gatsby-remark-link-card</div>
+    <div class="rlc-url-container">
+      <img class="rlc-favicon" src="https://www.google.com/s2/favicons?domain=www.npmjs.com" alt="remark-link-card favicon" width="16px" height="16px">
+      <span class="rlc-url">https://www.npmjs.com/package/remark-link-card</span>
+    </div>
+  </div>
+  <div class="rlc-image-container">
+      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+    </div>
+</a>
+`.trim()
+
+test('Use remark-link-card with remark-embedder', async () => {
+  const result = await remark()
+    .use(remarkEmbdder, {
+      transformers: [CodeSandboxTransformer]
+    })
+    .use(rlc)
+    .use(remarkHtmll)
+    .process(exampleMarkdown)
+
+  expect(result.contents.trim()).toEqual(expectedResult)
   // console.log(result.contents);
 })
