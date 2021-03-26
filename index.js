@@ -13,7 +13,7 @@ const rlc = (options) => {
   return async tree => {
     transformers = []
     visit(tree, 'paragraph', (paragraphNode, index) => {
-      if (paragraphNode.children.length !== 1) {
+      if (paragraphNode.children.length !== 1 || paragraphNode?.data !== undefined) {
         return tree
       }
       visit(paragraphNode, 'text', textNode => {
