@@ -13,6 +13,7 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@next/bundle-analyzer": "^10.0.9",
+    "@remark-embedder/core": "^1.2.4",
     "@remark-embedder/transformer-oembed": "^1.0.1",
     "cross-env": "^7.0.3",
     "framer-motion": "^4.0.3",
@@ -23,7 +24,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "remark-gfm": "^1.0.0",
-    "remark-link-card": "github:gladevise/remark-link-card#fix-with-remark-embedder",
+    "remark-link-card": "github:gladevise/remark-link-card",
     "remark-relative-links": "^0.0.6"
   },
   "devDependencies": {

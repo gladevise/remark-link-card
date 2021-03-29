@@ -2,12 +2,12 @@ import { Global, css } from '@emotion/react'
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import rlc from 'remark-link-card'
-import NextImage from 'next/image'
+import CustomImage from '@/components/image'
 
-import { getAllPosts, getPostBySlug } from '../../lib/api'
+import { getAllPosts, getPostBySlug } from '@/lib/api'
 
 const components = {
-  img: NextImage
+  img: CustomImage
 }
 
 export default function Post({ source, frontMatter }) {

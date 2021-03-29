@@ -3,7 +3,7 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import rlc from 'remark-link-card'
 
-import { getAllPosts, getPostBySlug } from '../../lib/api'
+import { getAllPosts, getPostBySlug } from '@/lib/api'
 
 export default function Post({ source, frontMatter }) {
   const content = hydrate(source)
