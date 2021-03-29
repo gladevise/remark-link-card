@@ -1,6 +1,6 @@
 {
   "name": "remark-link-card",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Remark plugin to convert text links to link cards inspired by gatsby-remark-link-card",
   "main": "index.js",
   "scripts": {
