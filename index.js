@@ -94,7 +94,7 @@ const fetchData = async (targetUrl, options) => {
   }
   // set open graph image alt
   const ogImageAlt = ogResult?.ogImage?.alt || title
-
+  ""
   return {
     title,
     description,
@@ -141,7 +141,13 @@ const createLinkCard = (data) => {
 }
 
 const downloadImage = async (url, saveDirectory) => {
-  const filename = sanitize(url)
+  let targetUrl
+  try {
+    targetUrl = new URL(url)
+  } catch (error) {
+    console.error(`[remark-link-card] Error: Failed to parse url "${url}"\n ${error}`);
+  }
+  const filename = sanitize(decodeURI(targetUrl.href))
   const saveFilePath = path.join(saveDirectory, filename)
   // check file existence(if it is existed, return filename)
   try {
@@ -159,7 +165,7 @@ const downloadImage = async (url, saveDirectory) => {
 
   // fetch data
   try {
-    const response = await fetch(url, {
+    const response = await fetch(targetUrl.href, {
       header: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
       },
@@ -168,7 +174,7 @@ const downloadImage = async (url, saveDirectory) => {
     const buffer = await response.buffer();
     writeFile(saveFilePath, buffer)
   } catch (error) {
-    console.error(`[remark-link-card] Error: Failed to download image from ${url}\n ${error}`);
+    console.error(`[remark-link-card] Error: Failed to download image from ${targetUrl.href}\n ${error}`);
     return undefined
   }
 
