@@ -5,7 +5,15 @@ export default function Image({
   src, alt, className, width, height
 }) {
   return (className?.includes('rlc-image') || className?.includes('rlc-favicon'))
-    ? <NextImage src={src} alt={alt} width={width} height={height} objectFit="cover" className={className} />
+    ? <NextImage
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      objectFit="cover"
+      layout="intrinsic"
+      className={className}
+    />
     : (
       <Center
         h="500px"

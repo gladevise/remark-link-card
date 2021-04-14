@@ -13,7 +13,8 @@ const theme = {
         textDecoration: 'none',
       },
       "h1,h2,h3,h4,h5,h6,p": {
-        marginBottom: "0.5em",
+        marginBottom: "0.25em",
+        marginTop: "0.75em",
       }
     },
   },

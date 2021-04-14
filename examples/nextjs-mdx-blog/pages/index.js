@@ -1,65 +1,32 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import CustomLink from '@/components/link'
+import { Container, Box, Heading, UnorderedList, ListItem } from '@chakra-ui/react'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <Container maxW="container.xl">
       <Head>
-        <title>Create Next App</title>
+        <title>remark-link-card</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="remark-link-card" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://remark-link-card-gladevise.vercel.app" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <Box as="main">
+        <Heading as="h1" size="3xl">remakr-link-card</Heading>
+        <Heading as="h2" size="xl">Features</Heading>
+        <UnorderedList fontSize="xl">
+          <ListItem>Convert text link to link card element</ListItem>
+          <ListItem>Download favicon and open graph image for next/image</ListItem>
+        </UnorderedList>
+        <Heading as="h2" size="xl">Demos</Heading>
+        <UnorderedList fontSize="xl">
+          <ListItem><CustomLink href="/rlc-simple/sample" >simple usage example</CustomLink></ListItem>
+          <ListItem><CustomLink href="/with-cache/sample" >image optimization with next/image</CustomLink></ListItem>
+          <ListItem><CustomLink href="/rlc-practical/sample" >practical usage example</CustomLink></ListItem>
+        </UnorderedList>
+      </Box>
+    </Container>
   )
 }

@@ -30,7 +30,14 @@ export default function Post({ source, frontMatter }) {
 
   return (
     <>
-      <Head><script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" /></Head>
+      <Head>
+        <title>{`${frontMatter.title} | remark-link-card`}</title>
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
+        <meta property="og:title" content={frontMatter.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://remark-link-card.vercel.app/rlc-practical/${frontMatter.slug}`} />
+        <meta property="og:image" content={`https://remark-link-card.vercel.app${frontMatter.coverImage}`} />
+      </Head>
       <Global styles={rlcStyle} />
       <Container maxW="container.xl" p="12">
         <H1>{frontMatter.title}</H1>
