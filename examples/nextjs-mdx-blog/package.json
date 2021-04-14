@@ -8,6 +8,9 @@
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "@chakra-ui/react": "^1.4.1",
     "@emotion/react": "^11.1.5",
