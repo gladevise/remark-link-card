@@ -42,7 +42,7 @@ const rlc = (options) => {
     try {
       await Promise.all(transformers.map(t => t()))
     } catch (error) {
-      console.error(error);
+      console.error(`[remark-link-card] Error: ${error}`);
     }
 
     return tree
@@ -54,7 +54,7 @@ const getOpenGraph = async (targetUrl) => {
     const { result } = await ogs({ url: targetUrl })
     return result
   } catch (error) {
-    console.error(`Failed to get the Open Graph data of ${error.result.requestUrl} due to ${error.result.error}.`);
+    console.error(`[remark-link-card] Error: Failed to get the Open Graph data of ${error.result.requestUrl} due to ${error.result.error}.`);
     return undefined
   }
 }
@@ -163,7 +163,7 @@ const downloadImage = async (url, saveDirectory) => {
     const buffer = await response.buffer();
     writeFile(saveFilePath, buffer)
   } catch (error) {
-    console.error(error);
+    console.error(`[remark-link-card] Error: Failed to download image from ${url}\n ${error}`);
     return undefined
   }
 
