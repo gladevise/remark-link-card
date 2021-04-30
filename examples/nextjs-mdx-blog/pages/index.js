@@ -24,6 +24,7 @@ export default function Home() {
         <UnorderedList fontSize="xl">
           <ListItem><CustomLink href="/rlc-simple/sample" >simple usage example</CustomLink></ListItem>
           <ListItem><CustomLink href="/with-cache/sample" >image optimization with next/image</CustomLink></ListItem>
+          <ListItem><CustomLink href="/shorten-url/sample" >display only hostname</CustomLink></ListItem>
           <ListItem><CustomLink href="/rlc-practical/sample" >practical usage example</CustomLink></ListItem>
         </UnorderedList>
       </Box>

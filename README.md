@@ -277,3 +277,25 @@ Bare links are converted to link cards.
   </div>
 </a>
 ```
+
+###### `options.shortenUrl`
+
+Display only hostname of target URL (`bool`, default: `false`)
+
+If `options.shortenUrl` is `true`, the output will look like this.
+
+```markdown
+<a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
+  <div class="rlc-info">
+    <div class="rlc-title">remark-link-card</div>
+    <div class="rlc-description">remark plugin to convert literal link to link card</div>
+    <div class="rlc-url-container">
+      <img class="rlc-favicon" src="https://www.google.com/s2/favicons?domain=www.npmjs.com" alt="remark-link-card favicon" width="16px" height="16px">
+      <span class="rlc-url">www.npmjs.com</span>
+    </div>
+  </div>
+  <div class="rlc-image-container">
+    <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+  </div>
+</a>
+```
