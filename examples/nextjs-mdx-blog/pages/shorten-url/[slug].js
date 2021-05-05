@@ -2,16 +2,11 @@ import { Global, css } from '@emotion/react'
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import rlc from 'remark-link-card'
-import CustomImage from '@/components/image'
 
 import { getAllPosts, getPostBySlug } from '@/lib/api'
 
-const components = {
-  img: CustomImage
-}
-
 export default function Post({ source, frontMatter }) {
-  const content = hydrate(source, { components })
+  const content = hydrate(source)
 
   return (
     <>
@@ -68,10 +63,6 @@ export default function Post({ source, frontMatter }) {
         align-items: center;
       }
 
-      .rlc-url-container > div {
-        margin-right: 4px !important;
-      }
-
       .rlc-favicon {
         margin-right: 4px;
         width: 16px;
@@ -88,10 +79,6 @@ export default function Post({ source, frontMatter }) {
       .rlc-image-container {
         position: relative;
         flex: 1 1 100px;
-      }
-
-      .rlc-image-container > div {
-        position: static !important;
       }
 
       .rlc-image {
@@ -129,7 +116,6 @@ export async function getStaticProps({ params }) {
 
   const mdxSource = await renderToString(content, {
     mdxOptions: {
-      components,
       remarkPlugins: [
         [rlc, { shortenUrl: true }],
       ],
