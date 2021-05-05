@@ -4,12 +4,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  images: {
-    domains: [
-      'www.google.com',
-      'static.npmjs.com',
-    ],
-  },
 };
 
 module.exports = withPlugins([
