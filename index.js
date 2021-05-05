@@ -94,13 +94,22 @@ const fetchData = async (targetUrl, options) => {
   }
   // set open graph image alt
   const ogImageAlt = ogResult?.ogImage?.alt || title
-  ""
+
+  // set display url
+  let displayUrl = ''
+  if (options?.shortenUrl) {
+    displayUrl = parsedUrl.hostname
+  } else {
+    displayUrl = targetUrl
+  }
+
   return {
     title,
     description,
     faviconSrc,
     ogImageSrc,
     ogImageAlt,
+    displayUrl,
     url: targetUrl
   }
 }
@@ -130,7 +139,7 @@ const createLinkCard = (data) => {
     ${descriptionElement}
     <div class="rlc-url-container">
       ${faviconElement}
-      <span class="rlc-url">${data.url}</span>
+      <span class="rlc-url">${data.displayUrl}</span>
     </div>
   </div>
   ${imageElement}

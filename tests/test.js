@@ -79,6 +79,16 @@ test('Use cache ogImage', async () => {
   // console.log(result.contents);
 })
 
+// Shorten URL
+test('Shorten URL', async () => {
+  const result = await remark()
+    .use(rlc, { shortenUrl: true })
+    .process('https://www.npmjs.com/package/remark-link-card')
+
+  expect(result.contents.trim()).toContain('<a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">')
+  expect(result.contents.trim()).toContain('<span class="rlc-url">www.npmjs.com</span>')
+})
+
 // With remark-embedder
 const CodeSandboxTransformer = {
   name: 'CodeSandbox',
