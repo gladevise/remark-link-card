@@ -9,7 +9,7 @@
     "analyze": "cross-env ANALYZE=true next build"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=12"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.5.1",
@@ -27,7 +27,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "remark-gfm": "^1.0.0",
-    "remark-link-card": "^1.2.3",
+    "remark-link-card": "github:gladevise/remark-link-card",
     "remark-relative-links": "^0.0.6"
   },
   "devDependencies": {

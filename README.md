@@ -4,22 +4,7 @@
 
 ## Requirements
 
-* `Node.js` >= 14
-
-If you host your site to [Vercel](https://vercel.com/), add `engines` to your `package.json` like this.
-
-```json
-  "engines": {
-    "node": ">=14"
-  },
-```
-
-If you host your site to [Netlify](https://www.netlify.com/), add `build.environment` to your `netlify.toml` like this.
-
-```toml
-[build.environment]
-NODE_VERSION="14"
-```
+* `Node.js` >= 12
 
 ## Install
 

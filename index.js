@@ -1,7 +1,7 @@
 const visit = require('unist-util-visit')
 const ogs = require('open-graph-scraper')
 const path = require('path')
-const { writeFile, access, mkdir } = require('fs/promises')
+const { writeFile, access, mkdir } = require('fs').promises
 const fetch = require('node-fetch')
 const sanitize = require('sanitize-filename')
 
@@ -13,9 +13,15 @@ const rlc = (options) => {
   return async tree => {
     transformers = []
     visit(tree, 'paragraph', (paragraphNode, index) => {
-      if (paragraphNode.children.length !== 1 || paragraphNode?.data !== undefined) {
+      if (paragraphNode.children.length !== 1) {
         return tree
       }
+
+      // If data exists, do nothing.
+      if (paragraphNode && paragraphNode.data !== undefined) {
+        return tree
+      }
+
       visit(paragraphNode, 'text', textNode => {
         const urls = textNode.value.match(/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/g);
         if (urls && urls.length === 1) {
@@ -64,13 +70,13 @@ const fetchData = async (targetUrl, options) => {
   const ogResult = await getOpenGraph(targetUrl)
   // set title
   const parsedUrl = new URL(targetUrl)
-  const title = ogResult?.ogTitle || parsedUrl.hostname
+  const title = ( ogResult && ogResult.ogTitle ) || parsedUrl.hostname
   // set description
-  const description = ogResult?.ogDescription || ''
+  const description =( ogResult && ogResult.ogDescription ) || ''
   // set favicon src
   const faviconUrl = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}`
   let faviconSrc = ''
-  if (options?.cache) {
+  if (options && options.cache) {
     faviconFilename = await downloadImage(
       faviconUrl,
       path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
@@ -81,8 +87,8 @@ const fetchData = async (targetUrl, options) => {
   }
   // set open graph image src
   let ogImageSrc = ''
-  if (ogResult?.ogImage?.url) {
-    if (options?.cache) {
+  if ( ogResult && ogResult.ogImage && ogResult.ogImage.url) {
+    if (options && options.cache) {
       const imageFilename = await downloadImage(
         ogResult.ogImage.url,
         path.join(process.cwd(), defaultSaveDirectory, defaultOutputDirectory)
@@ -93,15 +99,12 @@ const fetchData = async (targetUrl, options) => {
     }
   }
   // set open graph image alt
-  const ogImageAlt = ogResult?.ogImage?.alt || title
+  const ogImageAlt = (ogResult && ogResult.ogImage && ogResult.ogImage.alt ) || title
 
   // set display url
-  let displayUrl = ''
-  if (options?.shortenUrl) {
-    displayUrl = parsedUrl.hostname
-  } else {
-    displayUrl = targetUrl
-  }
+  const displayUrl = (options && options.shortenUrl)
+    ? parsedUrl.hostname
+    : targetUrl
 
   return {
     title,
