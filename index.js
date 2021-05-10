@@ -102,9 +102,15 @@ const fetchData = async (targetUrl, options) => {
   const ogImageAlt = (ogResult && ogResult.ogImage && ogResult.ogImage.alt ) || title
 
   // set display url
-  const displayUrl = (options && options.shortenUrl)
+  let displayUrl = (options && options.shortenUrl)
     ? parsedUrl.hostname
     : targetUrl
+
+  try {
+    displayUrl = decodeURI(displayUrl)
+  } catch (error) {
+    console.error(`[remark-link-card] Error: Cannot decode url: "${url}"\n ${error}`);
+  }
 
   return {
     title,

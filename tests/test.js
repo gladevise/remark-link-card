@@ -65,6 +65,18 @@ test('Multiple links in one line are not converted to link cards with next-mdx-r
   // console.log(mdxSource.renderedOutput);
 })
 
+// Decode Url
+const encodedUrl = "https://example.com/%E3%83%86%E3%82%B9%E3%83%88/foo%E3%83%90%E3%83%BC/#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"
+const decodedUrl = "https://example.com/テスト/fooバー/#はじめに"
+test('Decode Url', async () => {
+  const result = await remark()
+    .use(rlc)
+    .process(encodedUrl)
+
+  expect(result.contents.trim()).toContain(decodedUrl)
+  console.log(result.contents);
+})
+
 // Use cache ogImage
 test('Use cache ogImage', async () => {
   const result = await remark()
