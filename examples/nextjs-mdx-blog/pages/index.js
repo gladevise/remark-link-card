@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
 
       <Box as="main">
-        <Heading as="h1" size="3xl">remakr-link-card</Heading>
+        <Heading as="h1" size="3xl">remark-link-card</Heading>
         <Heading as="h2" size="xl">Features</Heading>
         <UnorderedList fontSize="xl">
           <ListItem>Convert text link to link card element</ListItem>
