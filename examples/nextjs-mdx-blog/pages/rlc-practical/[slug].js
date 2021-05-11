@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Global } from '@emotion/react'
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
 import rlc from 'remark-link-card'
 import gfm from 'remark-gfm'
 import remarkRelativeLinks from 'remark-relative-links'
@@ -26,7 +26,6 @@ const components = {
 }
 
 export default function Post({ source, frontMatter }) {
-  const content = hydrate(source, { components })
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function Post({ source, frontMatter }) {
       <Global styles={rlcStyle} />
       <Container maxW="container.xl" p="12">
         <H1>{frontMatter.title}</H1>
-        {content}
+        <MDXRemote {...source} components={components} />
       </Container>
     </>
   )
@@ -63,7 +62,7 @@ export async function getStaticProps({ params }) {
   // create relative links regex
   const domainRegex = new RegExp(`https?://(www.)?${process.env.SITE_DOMAIN}[\/]?`);
 
-  const mdxSource = await renderToString(content, {
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       components,
       remarkPlugins: [

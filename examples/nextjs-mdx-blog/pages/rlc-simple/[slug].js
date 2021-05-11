@@ -1,12 +1,11 @@
 import { Global, css } from '@emotion/react'
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
 import rlc from 'remark-link-card'
 
 import { getAllPosts, getPostBySlug } from '@/lib/api'
 
 export default function Post({ source, frontMatter }) {
-  const content = hydrate(source)
 
   return (
     <>
@@ -95,7 +94,7 @@ export default function Post({ source, frontMatter }) {
         padding: 3rem;
       `}>
         <h1>{frontMatter.title}</h1>
-        {content}
+        <MDXRemote {...source} />
       </div>
     </>
   )
@@ -114,7 +113,7 @@ export async function getStaticProps({ params }) {
 
   const { content, ...frontMatter } = post;
 
-  const mdxSource = await renderToString(content, {
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         rlc,
