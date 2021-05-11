@@ -102,6 +102,7 @@ test('Shorten URL', async () => {
 })
 
 // With remark-embedder
+// If remark-embedder conversion data exists, remark-link-card does nothing.
 const CodeSandboxTransformer = {
   name: 'CodeSandbox',
   // shouldTransform can also be async
@@ -124,26 +125,11 @@ const exampleMarkdown = `
 This is a CodeSandbox:
 
 https://codesandbox.io/s/css-variables-vs-themeprovider-df90h
-
-https://www.npmjs.com/package/remark-link-card
 `
 
 const expectedResult = `
 <p>This is a CodeSandbox:</p>
 <iframe src="https://codesandbox.io/embed/css-variables-vs-themeprovider-df90h" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
-<a class="rlc-container" href="https://www.npmjs.com/package/remark-link-card">
-  <div class="rlc-info">
-    <div class="rlc-title">remark-link-card</div>
-    <div class="rlc-description">Remark plugin to convert text links to link cards inspired by gatsby-remark-link-card</div>
-    <div class="rlc-url-container">
-      <img class="rlc-favicon" src="https://www.google.com/s2/favicons?domain=www.npmjs.com" alt="remark-link-card favicon" width="16px" height="16px">
-      <span class="rlc-url">https://www.npmjs.com/package/remark-link-card</span>
-    </div>
-  </div>
-  <div class="rlc-image-container">
-      <img class="rlc-image" src="https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
-    </div>
-</a>
 `.trim()
 
 test('Use remark-link-card with remark-embedder', async () => {

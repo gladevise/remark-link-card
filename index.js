@@ -127,7 +127,7 @@ const createLinkCard = (data) => {
 
   // create favicon element
   const faviconElement = data.faviconSrc ?
-    `<img class="rlc-favicon" src="${data.faviconSrc}" alt="${data.title} favicon" width="16px" height="16px">`.trim()
+    `<img class="rlc-favicon" src="${data.faviconSrc}" alt="${data.title} favicon" width="16" height="16">`.trim()
     : ''
 
   // create description element
@@ -137,7 +137,7 @@ const createLinkCard = (data) => {
   // create image element
   const imageElement = data.ogImageSrc ?
     `<div class="rlc-image-container">
-      <img class="rlc-image" src="${data.ogImageSrc}" alt="${data.ogImageAlt}" width="100%" height="100%"/>
+      <img class="rlc-image" src="${data.ogImageSrc}" alt="${data.ogImageAlt}" />
     </div>`.trim() : ''
 
   // create output HTML
