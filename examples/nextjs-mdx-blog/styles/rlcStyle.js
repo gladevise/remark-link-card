@@ -73,14 +73,11 @@ const rlcStyle = css`
 
 .rlc-image-container {
   position: relative;
-  flex: 1 1 100px;
-
-  & > div {
-    position: static !important;
-  }
+  flex: 1 1 150px;
 }
 
 .rlc-image {
+  position: absolute;
   object-fit: cover;
   width: 100%;
   height: 100%;
