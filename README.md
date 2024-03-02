@@ -242,7 +242,7 @@ Bare links are converted to link cards.
   <div class="rlc-info">
     <div class="rlc-title">Example Domain</div>
     <div class="rlc-url-container">
-      <img class="rlc-favicon" src="/remark-link-card/httpswww.google.coms2faviconsdomain=example.com" alt="Example Domain favicon" width="16px" height="16px">
+      <img class="rlc-favicon" src="/remark-link-card/87554a1e24413a0d430a2cc8d9c34f7480484021146aec6c0c4a04ac9234eff4" alt="Example Domain favicon" width="16px" height="16px">
       <span class="rlc-url">http://example.com/</span>
     </div>
   </div>
@@ -253,12 +253,12 @@ Bare links are converted to link cards.
     <div class="rlc-title">remark-link-card</div>
     <div class="rlc-description">remark plugin to convert literal link to link card</div>
     <div class="rlc-url-container">
-      <img class="rlc-favicon" src="/remark-link-card/httpswww.google.coms2faviconsdomain=www.npmjs.com" alt="remark-link-card favicon" width="16px" height="16px">
+      <img class="rlc-favicon" src="/remark-link-card/a7c5d786c782c012d6858ff3722fe7eb4e6ed16c256acb1e94b1f2dfa07eb116" alt="remark-link-card favicon" width="16px" height="16px">
       <span class="rlc-url">https://www.npmjs.com/package/remark-link-card</span>
     </div>
   </div>
   <div class="rlc-image-container">
-    <img class="rlc-image" src="/remark-link-card/httpsstatic.npmjs.com338e4905a2684ca96e08c7780fc68412.png" alt="remark-link-card" width="100%" height="100%"/>
+    <img class="rlc-image" src="/remark-link-card/149ff70d1db431d33579f403c17d9a1bdeba3690260dfa7d268583024e26f772.png" alt="remark-link-card" width="100%" height="100%"/>
   </div>
 </a>
 ```

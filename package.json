@@ -41,7 +41,6 @@
     "he": "^1.2.0",
     "node-fetch": "^2.6.1",
     "open-graph-scraper": "^4.8.1",
-    "sanitize-filename": "^1.6.3",
     "unist-util-visit": "^2.0.3"
   }
 }
