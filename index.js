@@ -4,7 +4,7 @@ const path = require('path');
 const { writeFile, access, mkdir } = require('fs').promises;
 const fetch = require('node-fetch');
 const he = require('he');
-const { createHash } = require('node:crypto');
+const { createHash } = require('crypto');
 
 const defaultSaveDirectory = 'public';
 const defaultOutputDirectory = '/remark-link-card/';
@@ -184,7 +184,7 @@ const downloadImage = async (url, saveDirectory) => {
     );
   }
   const hash = createHash("sha256").update(decodeURI(targetUrl.href)).digest("hex");
-  const filename = hash + path.extname(targetUrl.pathname);;
+  const filename = hash + path.extname(targetUrl.pathname);
   const saveFilePath = path.join(saveDirectory, filename);
   // check file existence(if it is existed, return filename)
   try {
